@@ -12,6 +12,12 @@
 		911E7E9B2373D604007B775F /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911E7E9A2373D604007B775F /* SourceEditorCommand.swift */; };
 		911E7EA02373D604007B775F /* Clear Closure.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 911E7E952373D604007B775F /* Clear Closure.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		911E7EA42373D65F007B775F /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9191071423711C270034ED20 /* String+Extensions.swift */; };
+		912B6DA7238471C300E4B484 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9191071423711C270034ED20 /* String+Extensions.swift */; };
+		912B6DAD2384750A00E4B484 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91979E6E2371007800A4FAA3 /* Cocoa.framework */; };
+		912B6DB02384750A00E4B484 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B6DAF2384750A00E4B484 /* SourceEditorExtension.swift */; };
+		912B6DB22384750A00E4B484 /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 912B6DB12384750A00E4B484 /* SourceEditorCommand.swift */; };
+		912B6DB72384750A00E4B484 /* Initializer Generator.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 912B6DAC2384750A00E4B484 /* Initializer Generator.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		912B6DBB2384755500E4B484 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9191071423711C270034ED20 /* String+Extensions.swift */; };
 		9191070623711B9B0034ED20 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91979E6E2371007800A4FAA3 /* Cocoa.framework */; };
 		9191070923711B9B0034ED20 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9191070823711B9B0034ED20 /* SourceEditorExtension.swift */; };
 		9191070B23711B9B0034ED20 /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9191070A23711B9B0034ED20 /* SourceEditorCommand.swift */; };
@@ -35,6 +41,13 @@
 			proxyType = 1;
 			remoteGlobalIDString = 911E7E942373D604007B775F;
 			remoteInfo = "Clear Closure";
+		};
+		912B6DB52384750A00E4B484 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 91979E4D2370FFFD00A4FAA3 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 912B6DAB2384750A00E4B484;
+			remoteInfo = "Initializer Generator";
 		};
 		9191070E23711B9B0034ED20 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -61,6 +74,7 @@
 			files = (
 				9191071023711B9B0034ED20 /* Print only in Debug.appex in Embed App Extensions */,
 				911E7EA02373D604007B775F /* Clear Closure.appex in Embed App Extensions */,
+				912B6DB72384750A00E4B484 /* Initializer Generator.appex in Embed App Extensions */,
 				91EDE548237A23F3007391C2 /* Sort Import Declarations.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
@@ -75,6 +89,11 @@
 		911E7E9A2373D604007B775F /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
 		911E7E9C2373D604007B775F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		911E7E9D2373D604007B775F /* Clear_Closure.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Clear_Closure.entitlements; sourceTree = "<group>"; };
+		912B6DAC2384750A00E4B484 /* Initializer Generator.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Initializer Generator.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		912B6DAF2384750A00E4B484 /* SourceEditorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorExtension.swift; sourceTree = "<group>"; };
+		912B6DB12384750A00E4B484 /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
+		912B6DB32384750A00E4B484 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		912B6DB42384750A00E4B484 /* Initializer_Generator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Initializer_Generator.entitlements; sourceTree = "<group>"; };
 		9191070523711B9B0034ED20 /* Print only in Debug.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Print only in Debug.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		9191070823711B9B0034ED20 /* SourceEditorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorExtension.swift; sourceTree = "<group>"; };
 		9191070A23711B9B0034ED20 /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
@@ -102,6 +121,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				911E7E962373D604007B775F /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		912B6DA92384750A00E4B484 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				912B6DAD2384750A00E4B484 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,6 +169,17 @@
 			path = "Clear Closure";
 			sourceTree = "<group>";
 		};
+		912B6DAE2384750A00E4B484 /* Initializer Generator */ = {
+			isa = PBXGroup;
+			children = (
+				912B6DAF2384750A00E4B484 /* SourceEditorExtension.swift */,
+				912B6DB12384750A00E4B484 /* SourceEditorCommand.swift */,
+				912B6DB32384750A00E4B484 /* Info.plist */,
+				912B6DB42384750A00E4B484 /* Initializer_Generator.entitlements */,
+			);
+			path = "Initializer Generator";
+			sourceTree = "<group>";
+		};
 		9191070723711B9B0034ED20 /* Print only in Debug */ = {
 			isa = PBXGroup;
 			children = (
@@ -160,6 +198,7 @@
 				9191070723711B9B0034ED20 /* Print only in Debug */,
 				911E7E972373D604007B775F /* Clear Closure */,
 				91EDE53F237A23F3007391C2 /* Sort Import Declarations */,
+				912B6DAE2384750A00E4B484 /* Initializer Generator */,
 				91979E6D2371007800A4FAA3 /* Frameworks */,
 				91979E562370FFFD00A4FAA3 /* Products */,
 			);
@@ -172,6 +211,7 @@
 				9191070523711B9B0034ED20 /* Print only in Debug.appex */,
 				911E7E952373D604007B775F /* Clear Closure.appex */,
 				91EDE53D237A23F3007391C2 /* Sort Import Declarations.appex */,
+				912B6DAC2384750A00E4B484 /* Initializer Generator.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -230,6 +270,23 @@
 			productReference = 911E7E952373D604007B775F /* Clear Closure.appex */;
 			productType = "com.apple.product-type.xcode-extension";
 		};
+		912B6DAB2384750A00E4B484 /* Initializer Generator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 912B6DB82384750A00E4B484 /* Build configuration list for PBXNativeTarget "Initializer Generator" */;
+			buildPhases = (
+				912B6DA82384750A00E4B484 /* Sources */,
+				912B6DA92384750A00E4B484 /* Frameworks */,
+				912B6DAA2384750A00E4B484 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Initializer Generator";
+			productName = "Initializer Generator";
+			productReference = 912B6DAC2384750A00E4B484 /* Initializer Generator.appex */;
+			productType = "com.apple.product-type.xcode-extension";
+		};
 		9191070423711B9B0034ED20 /* Print only in Debug */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9191071323711B9B0034ED20 /* Build configuration list for PBXNativeTarget "Print only in Debug" */;
@@ -262,6 +319,7 @@
 				9191070F23711B9B0034ED20 /* PBXTargetDependency */,
 				911E7E9F2373D604007B775F /* PBXTargetDependency */,
 				91EDE547237A23F3007391C2 /* PBXTargetDependency */,
+				912B6DB62384750A00E4B484 /* PBXTargetDependency */,
 			);
 			name = Shortcuts;
 			productName = Shortcuts;
@@ -298,6 +356,9 @@
 					911E7E942373D604007B775F = {
 						CreatedOnToolsVersion = 11.2;
 					};
+					912B6DAB2384750A00E4B484 = {
+						CreatedOnToolsVersion = 11.2.1;
+					};
 					9191070423711B9B0034ED20 = {
 						CreatedOnToolsVersion = 11.1;
 					};
@@ -326,12 +387,20 @@
 				9191070423711B9B0034ED20 /* Print only in Debug */,
 				911E7E942373D604007B775F /* Clear Closure */,
 				91EDE53C237A23F3007391C2 /* Sort Import Declarations */,
+				912B6DAB2384750A00E4B484 /* Initializer Generator */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		911E7E932373D604007B775F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		912B6DAA2384750A00E4B484 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -374,6 +443,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		912B6DA82384750A00E4B484 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				912B6DB02384750A00E4B484 /* SourceEditorExtension.swift in Sources */,
+				912B6DBB2384755500E4B484 /* String+Extensions.swift in Sources */,
+				912B6DB22384750A00E4B484 /* SourceEditorCommand.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		9191070123711B9B0034ED20 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -399,6 +478,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91EDE541237A23F3007391C2 /* SourceEditorExtension.swift in Sources */,
+				912B6DA7238471C300E4B484 /* String+Extensions.swift in Sources */,
 				91EDE543237A23F3007391C2 /* SourceEditorCommand.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -410,6 +490,11 @@
 			isa = PBXTargetDependency;
 			target = 911E7E942373D604007B775F /* Clear Closure */;
 			targetProxy = 911E7E9E2373D604007B775F /* PBXContainerItemProxy */;
+		};
+		912B6DB62384750A00E4B484 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 912B6DAB2384750A00E4B484 /* Initializer Generator */;
+			targetProxy = 912B6DB52384750A00E4B484 /* PBXContainerItemProxy */;
 		};
 		9191070F23711B9B0034ED20 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -469,6 +554,46 @@
 					"@executable_path/../../../../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.eduardo-fornari.Shortcuts.Clear-Closure";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		912B6DB92384750A00E4B484 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Initializer Generator/Initializer_Generator.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JM5PLAS48Y;
+				INFOPLIST_FILE = "Initializer Generator/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eduardo-fornari.Shortcuts.Initializer-Generator";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		912B6DBA2384750A00E4B484 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_ENTITLEMENTS = "Initializer Generator/Initializer_Generator.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				DEVELOPMENT_TEAM = JM5PLAS48Y;
+				INFOPLIST_FILE = "Initializer Generator/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@executable_path/../../../../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = "com.eduardo-fornari.Shortcuts.Initializer-Generator";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
@@ -716,6 +841,15 @@
 			buildConfigurations = (
 				911E7EA22373D604007B775F /* Debug */,
 				911E7EA32373D604007B775F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		912B6DB82384750A00E4B484 /* Build configuration list for PBXNativeTarget "Initializer Generator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				912B6DB92384750A00E4B484 /* Debug */,
+				912B6DBA2384750A00E4B484 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

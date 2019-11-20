@@ -15,7 +15,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     private let endIf = "#endif"
 
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
-        var updatedLineIndexes = [Int]()
         var endFile = invocation.buffer.lines.count
         var lineIndex = 0
         var waitingEnfIf = false
@@ -30,12 +29,10 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             if !waitingEnfIf && containsPrint {
                 leftWhiteSpace = line.leftWhiteSpace
                 invocation.buffer.lines.insert(leftWhiteSpace + ifDebug, at: lineIndex)
-                updatedLineIndexes.append(lineIndex)
                 endFile += 1
                 waitingEnfIf = true
             } else if waitingEnfIf && !containsEndIf && !containsPrint {
                 invocation.buffer.lines.insert(leftWhiteSpace + endIf, at: lineIndex)
-                updatedLineIndexes.append(lineIndex)
                 endFile += 1
                 waitingEnfIf = false
                 leftWhiteSpace = ""
@@ -45,32 +42,12 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 waitingEnfIf = false
             } else if containsPrint {
                 invocation.buffer.lines[lineIndex] = "\t" + line
-                updatedLineIndexes.append(lineIndex)
             }
 
             lineIndex += 1
         }
 
-        if !updatedLineIndexes.isEmpty {
-            invocation.updateLines(at: updatedLineIndexes)
-        }
         completionHandler(nil)
     }
     
-}
-
-public extension XCSourceEditorCommandInvocation {
-
-    func updateLines(at indexes: [Int]) {
-        if !indexes.isEmpty {
-            let updatedSelections: [XCSourceTextRange] = indexes.map { lineIndex in
-                let lineSelection = XCSourceTextRange()
-                lineSelection.start = XCSourceTextPosition(line: lineIndex, column: 0)
-                lineSelection.end = XCSourceTextPosition(line: lineIndex, column: 0)
-                return lineSelection
-            }
-            self.buffer.selections.setArray(updatedSelections)
-        }
-    }
-
 }

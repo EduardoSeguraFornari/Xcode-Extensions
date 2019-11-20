@@ -51,7 +51,14 @@ public extension XCSourceEditorCommandInvocation {
     func sortLines(from firstIndex: Int, to lastIndex: Int) {
         if firstIndex >= 0 && lastIndex < buffer.lines.count && firstIndex < lastIndex {
             let indexSet: IndexSet = [firstIndex, lastIndex]
-            let linesSorted = indexSet.map({ buffer.lines[$0] as! String }).sorted()
+
+            let linesSorted = indexSet.map({ index -> String in
+                var line = buffer.lines[index] as! String
+                line = line.withoutDoubleSpaces
+                line = line.trimmingCharacters(in: .whitespacesAndNewlines)
+                return line
+            }).sorted()
+
             var updatedLineIndexes: [Int] = []
             var lineIndex = 0
             for indexToUpdate in firstIndex...lastIndex {

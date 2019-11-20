@@ -32,4 +32,48 @@ public extension String {
         }
         return ""
     }
+
+    var withoutDoubleSpaces: String {
+        let components = self.components(separatedBy: .whitespaces)
+        return components.filter { !$0.isEmpty }.joined(separator: " ")
+    }
+
+    func range(from regularExpression: String) -> Range<String.Index>? {
+        return range(of: regularExpression, options:.regularExpression)
+    }
+
+    func removeSubstring(with range: Range<String.Index>) -> String {
+        if !(startIndex <= range.lowerBound && endIndex >= range.upperBound) {
+            return self
+        }
+
+        var distance = self.distance(from: startIndex, to: range.lowerBound)
+        let rangeStartIndex = index(startIndex, offsetBy: distance)
+        let leftSide = String(self[startIndex..<rangeStartIndex])
+
+        distance = self.distance(from: startIndex, to: range.upperBound)
+        let rangeEndIndex = index(startIndex, offsetBy: distance)
+        let rightSide = String(self[rangeEndIndex..<endIndex])
+
+        return leftSide + rightSide
+    }
+
+    func substring(from range: Range<String.Index>) -> String {
+        if !(startIndex <= range.lowerBound && endIndex >= range.upperBound) {
+            return ""
+        }
+
+        var distance = self.distance(from: startIndex, to: range.lowerBound)
+        let rangeStartIndex = index(startIndex, offsetBy: distance)
+
+        distance = self.distance(from: startIndex, to: range.upperBound)
+        distance = distance - 1
+        if distance < 0 {
+            distance = 0
+        }
+        let rangeEndIndex = index(startIndex, offsetBy: distance)
+
+        return String(self[rangeStartIndex...rangeEndIndex])
+    }
+
 }

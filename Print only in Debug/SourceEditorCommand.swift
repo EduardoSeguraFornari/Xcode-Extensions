@@ -15,6 +15,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     private let endIf = "#endif"
 
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
+
         var endFile = invocation.buffer.lines.count
         var lineIndex = 0
         var waitingEnfIf = false

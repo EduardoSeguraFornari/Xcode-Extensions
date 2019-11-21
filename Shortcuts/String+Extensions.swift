@@ -24,11 +24,9 @@ public extension String {
     }
 
     var leftWhiteSpace: String {
-        if let range = self.range(of: "[0-9a-zA-Z]\\w+", options:.regularExpression) {
-            let indexDistance = distance(from: startIndex, to: range.lowerBound)
-            let end = index(startIndex, offsetBy: indexDistance)
-            let range = startIndex..<index(before: end)
-            return String(self[range])
+        let regex = "( |\t)*"
+        if let range = range(from: regex) {
+            return substring(from: range)
         }
         return ""
     }

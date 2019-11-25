@@ -14,7 +14,7 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
     func perform(with invocation: XCSourceEditorCommandInvocation, completionHandler: @escaping (Error?) -> Void ) -> Void {
 
         let lines = invocation.selectedLines?.filter({ line -> Bool in
-            return !line.isEmpty
+            return !line.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
         })
 
         if let lines = lines {
@@ -35,21 +35,20 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
             if properties.count == lines.count {
                 let pp = properties.joined(separator: ", ")
                 let initializer = """
-                
+
                 \tinit(\(pp)) {
                 \(propertiesSet)
                 \t}
-                
+
                 """
                 print(initializer)
-                
+
                 guard let selection = invocation.buffer.selections.firstObject as? XCSourceTextRange else {
                     return
                 }
                 let lineIndex = selection.start.line
-                
+
                 invocation.buffer.lines.insert(initializer, at: lineIndex + properties.count)
-//                invocation.insert(lines: initializer, at: 0)
             }
         }
 
@@ -59,30 +58,30 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 }
 
 extension String {
-    var leftPropertyNameRegex: String {
-        return "(public|private|internal)? *(private\\(set\\)|internal\\(set\\))? *(var|let) *"
+    var singlePropertyWithTypeDefinitionRegex: String {
+        return "(public|open|private|internal)? *((private|internal)\\(set\\))? *(var|let) *[a-zA-Z_][0-9a-zA-Z_]* *: *[a-zA-Z_][0-9a-zA-Z_]*( *= *(\".*\"|true|false|[0-9]+(_[0-9]+)*(\\.[0-9]+(_[0-9]+)*)?|\\.[a-zA-Z_][0-9a-zA-Z_]*|[a-zA-Z_][0-9a-zA-Z_]*\\(.*\\)))?"
     }
 
     var propertyRegex: String {
-        return "(public|private|internal)? *(private\\(set\\)|internal\\(set\\))? *(var|let) *[0-9a-zA-Z]+ *\\:* *[0-9a-zA-Z_]+\\??"
+        return "[a-zA-Z_][0-9a-zA-Z_]* *: *[a-zA-Z_][0-9a-zA-Z_]*"
     }
 
     var propertyNameRegex: String {
-        return "[0-9a-zA-Z_]+"
+        return "[a-zA-Z_][0-9a-zA-Z_]*"
+    }
+
+    var isSinglePropertyWithOnlyTypeDefinition: Bool {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let range = newValue.range(from: singlePropertyWithTypeDefinitionRegex) {
+            return newValue.startIndex == range.lowerBound && newValue.endIndex == range.upperBound
+        }
+        return false
     }
 
     var property: String? {
-        var newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
-        newValue = newValue.withoutDoubleSpaces
-        if let propertyRange = newValue.range(from: propertyRegex) {
-            if newValue.startIndex == propertyRange.lowerBound && newValue.endIndex == propertyRange.upperBound {
-                if let range = newValue.range(from: leftPropertyNameRegex) {
-                    let property = newValue.removeSubstring(with: range)
-                    let sides = property.split(separator: ":")
-                    let leftSide = sides[0].trimmingCharacters(in: .whitespaces)
-                    let rightSide = sides[1].trimmingCharacters(in: .whitespaces)
-                    return leftSide + ": " + rightSide
-                }
+        if self.isSinglePropertyWithOnlyTypeDefinition {
+            if let range = self.range(from: propertyRegex) {
+                return self.substring(from: range)
             }
         }
         return nil

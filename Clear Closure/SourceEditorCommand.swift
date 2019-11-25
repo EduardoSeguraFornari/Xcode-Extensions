@@ -16,7 +16,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
         for lineIndex in 0 ..< invocation.buffer.lines.count {
             let line = invocation.buffer.lines[lineIndex] as! String
             if let range = line.range(of: "\\{.*\\(.+\\).+in", options:.regularExpression) {
-                // 2. When a closure is found, clean up its syntax
                 let cleanLine = line.remove(characters: ["(", ")"], in: range)
                 updatedLineIndexes.append(lineIndex)
                 invocation.buffer.lines[lineIndex] = cleanLine

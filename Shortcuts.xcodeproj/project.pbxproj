@@ -28,6 +28,7 @@
 		91979E5B2370FFFD00A4FAA3 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91979E5A2370FFFD00A4FAA3 /* ViewController.swift */; };
 		91979E5D2370FFFF00A4FAA3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 91979E5C2370FFFF00A4FAA3 /* Assets.xcassets */; };
 		91979E602370FFFF00A4FAA3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 91979E5E2370FFFF00A4FAA3 /* Main.storyboard */; };
+		91DED642238CB4DD00D04ED2 /* MyTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91DED641238CB4DD00D04ED2 /* MyTest.swift */; };
 		91EDE53E237A23F3007391C2 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 91979E6E2371007800A4FAA3 /* Cocoa.framework */; };
 		91EDE541237A23F3007391C2 /* SourceEditorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EDE540237A23F3007391C2 /* SourceEditorExtension.swift */; };
 		91EDE543237A23F3007391C2 /* SourceEditorCommand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91EDE542237A23F3007391C2 /* SourceEditorCommand.swift */; };
@@ -108,6 +109,7 @@
 		91979E612370FFFF00A4FAA3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		91979E622370FFFF00A4FAA3 /* Shortcuts.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Shortcuts.entitlements; sourceTree = "<group>"; };
 		91979E6E2371007800A4FAA3 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		91DED641238CB4DD00D04ED2 /* MyTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyTest.swift; sourceTree = "<group>"; };
 		91EDE53D237A23F3007391C2 /* Sort Import Declarations.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Sort Import Declarations.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		91EDE540237A23F3007391C2 /* SourceEditorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorExtension.swift; sourceTree = "<group>"; };
 		91EDE542237A23F3007391C2 /* SourceEditorCommand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SourceEditorCommand.swift; sourceTree = "<group>"; };
@@ -219,6 +221,7 @@
 		91979E572370FFFD00A4FAA3 /* Shortcuts */ = {
 			isa = PBXGroup;
 			children = (
+				91DED641238CB4DD00D04ED2 /* MyTest.swift */,
 				91979E582370FFFD00A4FAA3 /* AppDelegate.swift */,
 				91979E5A2370FFFD00A4FAA3 /* ViewController.swift */,
 				91979E5C2370FFFF00A4FAA3 /* Assets.xcassets */,
@@ -468,6 +471,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				91979E5B2370FFFD00A4FAA3 /* ViewController.swift in Sources */,
+				91DED642238CB4DD00D04ED2 /* MyTest.swift in Sources */,
 				9191071523711C270034ED20 /* String+Extensions.swift in Sources */,
 				91979E592370FFFD00A4FAA3 /* AppDelegate.swift in Sources */,
 			);

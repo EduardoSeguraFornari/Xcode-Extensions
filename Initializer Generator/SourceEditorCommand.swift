@@ -311,17 +311,6 @@ extension String {
 }
 
 public extension XCSourceEditorCommandInvocation {
-    func updateLines(at indexes: [Int]) {
-        if !indexes.isEmpty {
-            let updatedSelections: [XCSourceTextRange] = indexes.map { lineIndex in
-                let lineSelection = XCSourceTextRange()
-                lineSelection.start = XCSourceTextPosition(line: lineIndex, column: 0)
-                lineSelection.end = XCSourceTextPosition(line: lineIndex, column: 0)
-                return lineSelection
-            }
-            self.buffer.selections.setArray(updatedSelections)
-        }
-    }
 
     var selectedLines: [String]? {
         guard let selection = buffer.selections.firstObject as? XCSourceTextRange else {

@@ -192,10 +192,6 @@ class MyTest {
     var test101 = ""
     var test102 = MyClass(with: 102)
 
-    init(test1023 : Float) {
-        self.test1023 = test1023
-    }
-
     func testClearClosure() {
         let _ = [1 ,2 , 3, 4, 5].compactMap { (value) -> Double? in
             return Double(value)

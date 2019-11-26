@@ -41,7 +41,6 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
                 \t}
 
                 """
-                print(initializer)
 
                 guard let selection = invocation.buffer.selections.firstObject as? XCSourceTextRange else {
                     return
@@ -58,24 +57,29 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 }
 
 extension String {
+    var spaceRegex: String {
+        return "( |\t)*"
+    }
+
     var propertyNameRegex: String {
         return "[a-zA-Z_][0-9a-zA-Z_]*"
     }
+
     var propertyPrefixRegex: String {
-        return "(public|open|private|internal)? *((private|internal)\\(set\\))? *(var|let) *\(propertyNameRegex)"
+        return "(public|open|private|internal)?\(spaceRegex)((private|internal)\\(set\\))?\(spaceRegex)(var|let)\(spaceRegex)\(propertyNameRegex)"
     }
-    
+
     // String
     var stringRegex: String {
         return "\".*\""
     }
 
     var isStringPropertyRegex: String {
-        return "\(propertyPrefixRegex) *= *\(stringRegex)"
+        return "\(propertyPrefixRegex)\(spaceRegex)=\(spaceRegex)\(stringRegex)"
     }
 
     var stringPropertyRegex: String {
-        return "\(propertyNameRegex) *= *\(stringRegex)"
+        return "\(propertyNameRegex)\(spaceRegex)=\(spaceRegex)\(stringRegex)"
     }
 
     var isStringProperty: Bool {
@@ -105,11 +109,11 @@ extension String {
     }
 
     var isBoolPropertyRegex: String {
-        return "\(propertyPrefixRegex) *= *\(boolRegex)"
+        return "\(propertyPrefixRegex)\(spaceRegex)=\(spaceRegex)\(boolRegex)"
     }
 
     var boolPropertyRegex: String {
-        return "\(propertyNameRegex) *= *\(boolRegex)"
+        return "\(propertyNameRegex)\(spaceRegex)=\(spaceRegex)\(boolRegex)"
     }
 
     var isBoolProperty: Bool {
@@ -139,11 +143,11 @@ extension String {
     }
 
     var isIntPropertyRegex: String {
-        return "\(propertyPrefixRegex) *= *\(intRegex)"
+        return "\(propertyPrefixRegex)\(spaceRegex)=\(spaceRegex)\(intRegex)"
     }
 
     var intPropertyRegex: String {
-        return "\(propertyNameRegex) *= *\(intRegex)"
+        return "\(propertyNameRegex)\(spaceRegex)=\(spaceRegex)\(intRegex)"
     }
 
     var isIntProperty: Bool {
@@ -166,18 +170,18 @@ extension String {
         }
         return nil
     }
-    
+
     // Double
     var doubleRegex: String {
         return "\(intRegex).\(intRegex)"
     }
 
     var isDoublePropertyRegex: String {
-        return "\(propertyPrefixRegex) *= *\(doubleRegex)"
+        return "\(propertyPrefixRegex)\(spaceRegex)=\(spaceRegex)\(doubleRegex)"
     }
 
     var doublePropertyRegex: String {
-        return "\(propertyNameRegex) *= *\(doubleRegex)"
+        return "\(propertyNameRegex)\(spaceRegex)=\(spaceRegex)\(doubleRegex)"
     }
 
     var isDoubleProperty: Bool {
@@ -200,30 +204,31 @@ extension String {
         }
         return nil
     }
-    
+
     // Enum
     var enumRegex: String {
         return ".[a-zA-Z_][0-9a-zA-Z_]*"
     }
+
     // Custom Object
-    var customObjectInitializedRegex: String {
-        return "[a-zA-Z_][0-9a-zA-Z_]*\\(.*\\)"
-    }
-    
     var customObjectRegex: String {
         return "[a-zA-Z_][0-9a-zA-Z_]*"
     }
-    
+
+    var customObjectInitializedRegex: String {
+        return "\(customObjectRegex)\\(.*\\)"
+    }
+
     var customObjectWithoutInitRegex: String {
-        return "\(propertyNameRegex) *= *\(customObjectRegex)"
+        return "\(propertyNameRegex)\(spaceRegex)=\(spaceRegex)\(customObjectRegex)"
     }
 
     var isCustomObjectPropertyRegex: String {
-        return "\(propertyPrefixRegex) *= *\(customObjectInitializedRegex)"
+        return "\(propertyPrefixRegex)\(spaceRegex)=\(spaceRegex)\(customObjectInitializedRegex)"
     }
 
     var customObjectPropertyRegex: String {
-        return "\(propertyNameRegex) *= *\(customObjectInitializedRegex)"
+        return "\(propertyNameRegex)\(spaceRegex)=\(spaceRegex)\(customObjectInitializedRegex)"
     }
 
     var isCustomObjectProperty: Bool {
@@ -246,18 +251,17 @@ extension String {
         }
         return nil
     }
-    
-//    customObjectRegex
+
     var singlePropertyWithTypeDefinitionRegex: String {
-        return "\(propertyPrefixRegex) *: *\(customObjectRegex)( *= *(\(stringRegex)|\(boolRegex)|\(doubleRegex)|\(intRegex)|\(customObjectInitializedRegex)))?"
+        return "\(propertyPrefixRegex)\(spaceRegex):\(spaceRegex)\(customObjectRegex)(\(spaceRegex)=\(spaceRegex)(\(stringRegex)|\(boolRegex)|\(doubleRegex)|\(intRegex)|\(customObjectInitializedRegex)))?"
     }
 
     var singlePropertyWithOnlyValueDefinitionRegex: String {
-        return "\(propertyPrefixRegex) *= *(\(stringRegex)|\(boolRegex)|\(doubleRegex)|\(intRegex)|\(customObjectInitializedRegex))"
+        return "\(propertyPrefixRegex)\(spaceRegex)=\(spaceRegex)(\(stringRegex)|\(boolRegex)|\(doubleRegex)|\(intRegex)|\(customObjectInitializedRegex))"
     }
 
     var propertyRegex: String {
-        return "\(propertyNameRegex) *: *\(customObjectRegex)"
+        return "\(propertyNameRegex)\(spaceRegex):\(spaceRegex)\(customObjectRegex)"
     }
 
     var isSinglePropertyWithOnlyTypeDefinition: Bool {

@@ -19,7 +19,7 @@ class MyTest {
     open     var test002: String
     private  var test003: String
     internal var test004: String
-    
+
     private(set) var test005: String
 
     public   private(set)var test006: String
@@ -38,6 +38,25 @@ class MyTest {
     private  let test014: String
     internal let test015: String
 
+    init(test000: String, test001: String, test002: String, test003: String, test004: String, test005: String, test006: String, test007: String, test008: String, test009: String, test010: String, test011: String, test012: String, test013: String, test014: String, test015: String) {
+        self.test000 = test000
+        self.test001 = test001
+        self.test002 = test002
+        self.test003 = test003
+        self.test004 = test004
+        self.test005 = test005
+        self.test006 = test006
+        self.test007 = test007
+        self.test008 = test008
+        self.test009 = test009
+        self.test010 = test010
+        self.test011 = test011
+        self.test012 = test012
+        self.test013 = test013
+        self.test014 = test014
+        self.test015 = test015
+    }
+
     // String
     var test016: String = "sdfghjkl"
 
@@ -45,7 +64,7 @@ class MyTest {
     open     var test018: String = "sdfghjkl"
     private  var test019: String = "sdfghjkl"
     internal var test020: String = "sdfghjkl"
-    
+
     private(set) var test021: String = "sdfghjkl"
 
     public   private(set)var test022: String = "sdfghjkl"
@@ -70,7 +89,7 @@ class MyTest {
     open     var test034: Bool = true
     private  var test035: Bool = true
     internal var test036: Bool = true
-    
+
     private(set) var test037: Bool = true
 
     public   private(set)var test038: Bool = true
@@ -87,7 +106,7 @@ class MyTest {
     public   let test045: Bool = true
     private  let test046: Bool = true
     internal let test047: Bool = true
-    
+
     // Bool false
     var test048: Bool = false
 
@@ -95,7 +114,7 @@ class MyTest {
     open     var test050: Bool = false
     private  var test051: Bool = false
     internal var test052: Bool = false
-    
+
     private(set) var test053: Bool = false
 
     public   private(set)var test054: Bool = false
@@ -120,7 +139,7 @@ class MyTest {
     open     var test066: Int = 0
     private  var test067: Int = 0
     internal var test068: Int = 0
-    
+
     private(set) var test069: Int = 0
 
     public   private(set)var test070: Int = 0
@@ -145,7 +164,7 @@ class MyTest {
     open     var test082: Double = 0.0
     private  var test083: Double = 0.0
     internal var test084: Double = 0.0
-    
+
     private(set) var test085: Double = 0.0
 
     public   private(set)var test086: Double = 0.0
@@ -162,9 +181,9 @@ class MyTest {
     public   let test093: Double = 0.0
     private  let test094: Double = 0.0
     internal let test095: Double = 0.0
-    
+
     // single property without type definition
-    
+
     var test096 = 0
     var test097 = 0.0
     var test098 = 1_000.0
@@ -173,6 +192,9 @@ class MyTest {
     var test101 = ""
     var test102 = MyClass(with: 102)
 
+    init(test1023 : Float) {
+        self.test1023 = test1023
+    }
 
     func testClearClosure() {
         let _ = [1 ,2 , 3, 4, 5].compactMap { (value) -> Double? in
@@ -191,17 +213,8 @@ class MyTest {
     }
 }
 
-
-
 class MyClass {
     init(with value: Int) {
         
     }
 }
-
-func myClass(with value: Int) -> MyClass {
-    return MyClass(with: value)
-}
-
-var myClassA = MyClass(with: 1)
-var myClassB = myClass(with: 1)

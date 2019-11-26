@@ -253,7 +253,7 @@ extension String {
     }
 
     var singlePropertyWithTypeDefinitionRegex: String {
-        return "\(propertyPrefixRegex)\(spaceRegex):\(spaceRegex)\(customObjectRegex)(\(spaceRegex)=\(spaceRegex)(\(stringRegex)|\(boolRegex)|\(doubleRegex)|\(intRegex)|\(customObjectInitializedRegex)))?"
+        return "\(propertyPrefixRegex)\(spaceRegex):\(spaceRegex)\(customObjectRegex)(\(spaceRegex)=\(spaceRegex)(\(stringRegex)|\(boolRegex)|\(doubleRegex)|\(intRegex)|\(customObjectInitializedRegex)|\(enumRegex)))?"
     }
 
     var singlePropertyWithOnlyValueDefinitionRegex: String {

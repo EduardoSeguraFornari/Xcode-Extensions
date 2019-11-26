@@ -58,16 +58,198 @@ class SourceEditorCommand: NSObject, XCSourceEditorCommand {
 }
 
 extension String {
+    var propertyNameRegex: String {
+        return "[a-zA-Z_][0-9a-zA-Z_]*"
+    }
+    var propertyPrefixRegex: String {
+        return "(public|open|private|internal)? *((private|internal)\\(set\\))? *(var|let) *\(propertyNameRegex)"
+    }
+    
+    // String
+    var stringRegex: String {
+        return "\".*\""
+    }
+
+    var isStringPropertyRegex: String {
+        return "\(propertyPrefixRegex) *= *\(stringRegex)"
+    }
+
+    var stringPropertyRegex: String {
+        return "\(propertyNameRegex) *= *\(stringRegex)"
+    }
+
+    var isStringProperty: Bool {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let range = newValue.range(from: isStringPropertyRegex) {
+            return newValue.startIndex == range.lowerBound && newValue.endIndex == range.upperBound
+        }
+        return false
+    }
+
+    var stringProperty: String? {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if newValue.isStringProperty {
+            if let range = self.range(from: stringPropertyRegex) {
+                let property =  self.substring(from: range)
+                if let name = property.propertyName {
+                    return name + ": String"
+                }
+            }
+        }
+        return nil
+    }
+
+    // Bool
+    var boolRegex: String {
+        return "(true|false)"
+    }
+
+    var isBoolPropertyRegex: String {
+        return "\(propertyPrefixRegex) *= *\(boolRegex)"
+    }
+
+    var boolPropertyRegex: String {
+        return "\(propertyNameRegex) *= *\(boolRegex)"
+    }
+
+    var isBoolProperty: Bool {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let range = newValue.range(from: isBoolPropertyRegex) {
+            return newValue.startIndex == range.lowerBound && newValue.endIndex == range.upperBound
+        }
+        return false
+    }
+
+    var boolProperty: String? {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if newValue.isBoolProperty {
+            if let range = self.range(from: boolPropertyRegex) {
+                let property =  self.substring(from: range)
+                if let name = property.propertyName {
+                    return name + ": Bool"
+                }
+            }
+        }
+        return nil
+    }
+
+    // Int
+    var intRegex: String {
+        return "[0-9]+(_[0-9]|[0-9])*"
+    }
+
+    var isIntPropertyRegex: String {
+        return "\(propertyPrefixRegex) *= *\(intRegex)"
+    }
+
+    var intPropertyRegex: String {
+        return "\(propertyNameRegex) *= *\(intRegex)"
+    }
+
+    var isIntProperty: Bool {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let range = newValue.range(from: isIntPropertyRegex) {
+            return newValue.startIndex == range.lowerBound && newValue.endIndex == range.upperBound
+        }
+        return false
+    }
+
+    var intProperty: String? {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if newValue.isIntProperty {
+            if let range = self.range(from: intPropertyRegex) {
+                let property =  self.substring(from: range)
+                if let name = property.propertyName {
+                    return name + ": Int"
+                }
+            }
+        }
+        return nil
+    }
+    
+    // Double
+    var doubleRegex: String {
+        return "\(intRegex).\(intRegex)"
+    }
+
+    var isDoublePropertyRegex: String {
+        return "\(propertyPrefixRegex) *= *\(doubleRegex)"
+    }
+
+    var doublePropertyRegex: String {
+        return "\(propertyNameRegex) *= *\(doubleRegex)"
+    }
+
+    var isDoubleProperty: Bool {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let range = newValue.range(from: isDoublePropertyRegex) {
+            return newValue.startIndex == range.lowerBound && newValue.endIndex == range.upperBound
+        }
+        return false
+    }
+
+    var doubleProperty: String? {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if newValue.isDoubleProperty {
+            if let range = self.range(from: doublePropertyRegex) {
+                let property =  self.substring(from: range)
+                if let name = property.propertyName {
+                    return name + ": Double"
+                }
+            }
+        }
+        return nil
+    }
+    
+    // Custom Object
+    var customObjectRegex: String {
+        return "[a-zA-Z_][0-9a-zA-Z_]*(.*)"
+    }
+    
+    var customObjectWithoutInitRegex: String {
+        return "\(propertyNameRegex) *= *[a-zA-Z_][0-9a-zA-Z_]*"
+    }
+
+    var isCustomObjectPropertyRegex: String {
+        return "\(propertyPrefixRegex) *= *\(customObjectRegex)"
+    }
+
+    var customObjectPropertyRegex: String {
+        return "\(propertyNameRegex) *= *\(customObjectRegex)"
+    }
+
+    var isCustomObjectProperty: Bool {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let range = newValue.range(from: isCustomObjectPropertyRegex) {
+            return newValue.startIndex == range.lowerBound && newValue.endIndex == range.upperBound
+        }
+        return false
+    }
+
+    var customObjectProperty: String? {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if newValue.isCustomObjectProperty {
+            if let range = self.range(from: customObjectPropertyRegex) {
+                let property =  self.substring(from: range)
+                if let range = property.range(from: customObjectWithoutInitRegex) {
+                    return property.substring(from: range).replacingOccurrences(of: "=", with: ":")
+                }
+            }
+        }
+        return nil
+    }
+    
+    
     var singlePropertyWithTypeDefinitionRegex: String {
-        return "(public|open|private|internal)? *((private|internal)\\(set\\))? *(var|let) *[a-zA-Z_][0-9a-zA-Z_]* *: *[a-zA-Z_][0-9a-zA-Z_]*( *= *(\".*\"|true|false|[0-9]+(_[0-9]+)*(\\.[0-9]+(_[0-9]+)*)?|\\.[a-zA-Z_][0-9a-zA-Z_]*|[a-zA-Z_][0-9a-zA-Z_]*\\(.*\\)))?"
+        return "\(propertyPrefixRegex) *: *[a-zA-Z_][0-9a-zA-Z_]*( *= *(\(stringRegex)|\(boolRegex)|[0-9]+(_[0-9]+)*(\\.[0-9]+(_[0-9]+)*)?|\\.[a-zA-Z_][0-9a-zA-Z_]*|[a-zA-Z_][0-9a-zA-Z_]*\\(.*\\)))?"
+    }
+
+    var singlePropertyWithOnlyValueDefinitionRegex: String {
+        return "\(propertyPrefixRegex) *= *(\(stringRegex)|\(boolRegex)|[0-9]+(_[0-9]+)*(\\.[0-9]+(_[0-9]+)*)?|\\.[a-zA-Z_][0-9a-zA-Z_]*|[a-zA-Z_][0-9a-zA-Z_]*\\(.*\\))"
     }
 
     var propertyRegex: String {
-        return "[a-zA-Z_][0-9a-zA-Z_]* *: *[a-zA-Z_][0-9a-zA-Z_]*"
-    }
-
-    var propertyNameRegex: String {
-        return "[a-zA-Z_][0-9a-zA-Z_]*"
+        return "\(propertyNameRegex) *: *[a-zA-Z_][0-9a-zA-Z_]*"
     }
 
     var isSinglePropertyWithOnlyTypeDefinition: Bool {
@@ -78,10 +260,31 @@ extension String {
         return false
     }
 
+    var isSinglePropertyWithOnlyValueDefinition: Bool {
+        let newValue = self.trimmingCharacters(in: .whitespacesAndNewlines)
+        if let range = newValue.range(from: singlePropertyWithOnlyValueDefinitionRegex) {
+            return newValue.startIndex == range.lowerBound && newValue.endIndex == range.upperBound
+        }
+        return false
+    }
+
+
     var property: String? {
         if self.isSinglePropertyWithOnlyTypeDefinition {
             if let range = self.range(from: propertyRegex) {
                 return self.substring(from: range)
+            }
+        } else if self.isSinglePropertyWithOnlyValueDefinition {
+            if let property = self.stringProperty {
+                return property
+            } else if let property = self.boolProperty {
+                return property
+            } else if let property = self.intProperty {
+                return property
+            } else if let property = self.doubleProperty {
+                return property
+            } else if let property = self.customObjectProperty {
+                return property
             }
         }
         return nil

@@ -30,25 +30,6 @@ class MyTest {
 
     public internal(set) var test010: String
 
-    init(test000: String, test001: String, test002: String, test003: String, test004: String, test005: String, test006: String, test007: String, test008: String, test009: String, test010: String, test011: String, test012: String, test013: String, test014: String, test015: String) {
-        self.test000 = test000
-        self.test001 = test001
-        self.test002 = test002
-        self.test003 = test003
-        self.test004 = test004
-        self.test005 = test005
-        self.test006 = test006
-        self.test007 = test007
-        self.test008 = test008
-        self.test009 = test009
-        self.test010 = test010
-        self.test011 = test011
-        self.test012 = test012
-        self.test013 = test013
-        self.test014 = test014
-        self.test015 = test015
-    }
-
     open   internal(set) var test011: String
 
     let test012: String
@@ -56,8 +37,6 @@ class MyTest {
     public   let test013: String
     private  let test014: String
     internal let test015: String
-
-    
 
     // String
     var test016: String = "sdfghjkl"

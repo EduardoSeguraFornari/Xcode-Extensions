@@ -201,21 +201,29 @@ extension String {
         return nil
     }
     
+    // Enum
+    var enumRegex: String {
+        return ".[a-zA-Z_][0-9a-zA-Z_]*"
+    }
     // Custom Object
+    var customObjectInitializedRegex: String {
+        return "[a-zA-Z_][0-9a-zA-Z_]*\\(.*\\)"
+    }
+    
     var customObjectRegex: String {
-        return "[a-zA-Z_][0-9a-zA-Z_]*(.*)"
+        return "[a-zA-Z_][0-9a-zA-Z_]*"
     }
     
     var customObjectWithoutInitRegex: String {
-        return "\(propertyNameRegex) *= *[a-zA-Z_][0-9a-zA-Z_]*"
+        return "\(propertyNameRegex) *= *\(customObjectRegex)"
     }
 
     var isCustomObjectPropertyRegex: String {
-        return "\(propertyPrefixRegex) *= *\(customObjectRegex)"
+        return "\(propertyPrefixRegex) *= *\(customObjectInitializedRegex)"
     }
 
     var customObjectPropertyRegex: String {
-        return "\(propertyNameRegex) *= *\(customObjectRegex)"
+        return "\(propertyNameRegex) *= *\(customObjectInitializedRegex)"
     }
 
     var isCustomObjectProperty: Bool {
@@ -239,17 +247,17 @@ extension String {
         return nil
     }
     
-    
+//    customObjectRegex
     var singlePropertyWithTypeDefinitionRegex: String {
-        return "\(propertyPrefixRegex) *: *[a-zA-Z_][0-9a-zA-Z_]*( *= *(\(stringRegex)|\(boolRegex)|[0-9]+(_[0-9]+)*(\\.[0-9]+(_[0-9]+)*)?|\\.[a-zA-Z_][0-9a-zA-Z_]*|[a-zA-Z_][0-9a-zA-Z_]*\\(.*\\)))?"
+        return "\(propertyPrefixRegex) *: *\(customObjectRegex)( *= *(\(stringRegex)|\(boolRegex)|\(doubleRegex)|\(intRegex)|\(customObjectInitializedRegex)))?"
     }
 
     var singlePropertyWithOnlyValueDefinitionRegex: String {
-        return "\(propertyPrefixRegex) *= *(\(stringRegex)|\(boolRegex)|[0-9]+(_[0-9]+)*(\\.[0-9]+(_[0-9]+)*)?|\\.[a-zA-Z_][0-9a-zA-Z_]*|[a-zA-Z_][0-9a-zA-Z_]*\\(.*\\))"
+        return "\(propertyPrefixRegex) *= *(\(stringRegex)|\(boolRegex)|\(doubleRegex)|\(intRegex)|\(customObjectInitializedRegex))"
     }
 
     var propertyRegex: String {
-        return "\(propertyNameRegex) *: *[a-zA-Z_][0-9a-zA-Z_]*"
+        return "\(propertyNameRegex) *: *\(customObjectRegex)"
     }
 
     var isSinglePropertyWithOnlyTypeDefinition: Bool {
